@@ -1,0 +1,7 @@
+header {
+  background-color: var(--gray-800);
+}
+
+header nav {
+  max-width: 900px;
+}
