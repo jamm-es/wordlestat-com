@@ -15,10 +15,9 @@ function NewDataTimer(props) {
   }, []);
 
   const timeDeltaSeconds = Math.max(Math.floor((targetTimeRef.current - curTime) / 1000), 0);
-  console.log(curTime, targetTimeRef);
   return <p>
     New data in {Math.floor(timeDeltaSeconds / 60)}:{(timeDeltaSeconds % 60).toString().padStart(2, '0')}
-    {timeDeltaSeconds === 0 && <a className='link-info ml-3' onClick={() => window.location.reload()}>Refresh</a>}
+    {timeDeltaSeconds === 0 && <a className='link-info' style={{ 'marginLeft': '1rem' }} onClick={() => window.location.reload()}>Refresh</a>}
   </p>
 }
 

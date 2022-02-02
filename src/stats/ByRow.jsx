@@ -8,16 +8,36 @@ function ByRow(props) {
   useEffect(() => {
     if(props.data.length === 0) return;
 
+    for(const d of props.data) {
+      d.x = 0;
+      d.y = 0;
+    }
+
     const svg = d3.select(svgRef.current)
       .attr('height', 500)
-      .attr('viewBox', [-10, -30, 130, 500]);
+      .attr('viewBox', [-10, -30, 140, 500]);
 
     const bars = svg.selectAll('.by-row-bar')
       .data(props.data)
       .enter()
       .append('svg:g')
         .attr('class', 'by-row-bar')
-        .attr('transform', (_, i) => `translate(0, ${i*70})`);
+        .attr('transform', (_, i) => `translate(0, ${i*70})`)
+        .on('mouseover', function(e) {
+          e.stopPropagation();
+          d3.select(props.tooltipRef.current)
+            .style('visibility', 'visible');
+        })
+        .on('mousemove', function(e, d) {
+          d3.select(props.tooltipRef.current)
+            .style('left', e.pageX + 10 + 'px')
+            .style('top', e.pageY + 10 + 'px');
+        })
+        .on('mouseleave', function(e) {
+          e.stopPropagation();
+          d3.select(props.tooltipRef.current)
+            .style('visibility', 'hidden');
+        });
 
     // bars, from right to left: correct, wrong place, wrong letter
 
@@ -52,7 +72,13 @@ function ByRow(props) {
         .delay((_, i) => i*250)
         .attr('width', 0);
 
-  }, [props.data])
+    bars.each(function(d) {
+      d.x = this.getBoundingClientRect().x;
+      d.y = this.getBoundingClientRect().y;
+      console.log(d.x, d.y);
+    });
+
+  }, [props.data]);
 
   return <svg ref={svgRef} />
 }

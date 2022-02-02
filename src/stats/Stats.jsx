@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
@@ -17,6 +17,8 @@ function Stats(props) {
 
   const [data, setData] = useState({ byLetter: [], byRow: [], wins: [], total: '?' });
 
+  const tooltip = useRef(null);
+
   useEffect(() => {
     axios.get(`https://api.wordlestat.com/wordle-data/${wordleNumber}`)
       .then(res => {
@@ -26,9 +28,11 @@ function Stats(props) {
 
   return <div className='stats-background'>
     <main className='wrapper mx-auto px-2'>
+      <div>Test</div>
+      <div className='stats-tooltip position-fixed' ref={tooltip} >fjdaskldfljdas</div>
       <Row>
         <Col sm={3}>
-          <ByRow data={data.byRow}/>
+          <ByRow data={data.byRow} tooltipRef={tooltip} />
         </Col>
         <Col sm={6}>
           <ByLetter data={data.byLetter}/>
