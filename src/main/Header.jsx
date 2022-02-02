@@ -1,23 +1,23 @@
 import React from "react";
-import { Nav, Navbar, Container } from 'react-bootstrap';
 
 import './header.css';
 
 function Header(props) {
 
-  return <header>
-    <Navbar className='justify-content-between mx-auto' variant='dark'>
-      <Nav.Link href={`/${props.wordleNumber-1}`}>
-        Prev
-      </Nav.Link>
-      <Navbar.Brand>
-        WORDLESTAT
-      </Navbar.Brand>
-      <Nav.Link href={`/${props.wordleNumber+1}`}>
-        Next
-      </Nav.Link>
-    </Navbar>
-  </header>
+  return <div className='header-background'>
+    <div className='wrapper mx-auto px-2'>
+      <header className='d-flex justify-content-center py-2'>
+        <div className='logo'>
+          <span>WORDLE</span>
+          <span>stat</span>
+        </div>
+        <div className='header-explain'>
+          <a className='link-light'>what is this?</a>
+        </div>
+      </header>
+    </div>
+  </div>
+  
 
 }
 

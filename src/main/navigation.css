@@ -1,0 +1,16 @@
+.nav-background {
+  background-color: var(--bs-gray-800);
+}
+
+nav {
+  max-width: 900px;
+  font-size: 1.25rem;
+}
+
+nav > * {
+  padding: 0 !important;
+}
+
+.nav-date {
+  font-size: 0.75rem;
+}

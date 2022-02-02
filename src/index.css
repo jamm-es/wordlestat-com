@@ -1,3 +1,35 @@
 body {
-  font-family: Arial, Helvetica, 'Helvetica Neue', 'Neue Helvetica', Roboto, sans-serif;
+  font-family: 'Lato', sans-serif;
+  background-color: var(--bs-gray-900);
+  --correct: rgb(83, 141, 78);
+  --wrong-place: rgb(181, 159, 59);
+  --wrong-letter: rgb(58, 58, 60);
+}
+
+.fill-correct {
+  fill: var(--correct);
+}
+
+.fill-wrong-place {
+  fill: var(--wrong-place);
+}
+
+.fill-wrong-letter {
+  fill: var(--wrong-letter);
+}
+
+.fill-stats-background {
+  fill: var(--bs-gray-900);
+}
+
+.logo {
+  font-weight: bold;
+}
+
+.logo :nth-child(2) {
+  font-family: Consolas, monospace;
+}
+
+.wrapper {
+  max-width: 768px;
 }
