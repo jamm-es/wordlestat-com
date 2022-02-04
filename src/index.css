@@ -18,6 +18,14 @@ body {
   color: var(--wrong-letter);
 }
 
+.color-200 {
+  color: var(--bs-gray-200);
+}
+
+.color-500 {
+  color: var(--bs-gray-500);
+}
+
 .fill-correct {
   fill: var(--correct);
 }

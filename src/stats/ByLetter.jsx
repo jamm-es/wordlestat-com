@@ -27,7 +27,31 @@ function ByLetter(props) {
       .enter()
       .append('svg:g')
         .attr('class', 'by-letter-square')
-        .attr('transform', d => `translate(${d.col*70}, ${d.row*70})`);
+        .attr('transform', d => `translate(${d.col*70}, ${d.row*70})`)
+        .on('mouseenter', function(_, d) {
+          d3.select(this)
+            .attr('opacity', 0.8);
+          d3.select(props.tooltipRef.current)
+            .style('visibility', 'visible')
+            .html(`
+              <p class='my-0' style='font-weight: 700'>Row ${d.row+1}, position ${d.col+1}</p>
+              <p class='color-200 my-0'>Total: ${d.total} letters</p>
+              <p class='color-correct my-0'>Correct: ${d.correct} letters (${(d.correct/d.total*100).toFixed(2)}%)</p>
+              <p class='color-wrong-place my-0'>Wrong place: ${d.wrongPlace} letters (${(d.wrongPlace/d.total*100).toFixed(2)}%)</p>
+              <p class='color-500 my-0'>Wrong letter: ${d.wrongLetter} letters (${(d.wrongLetter/d.total*100).toFixed(2)}%)</p>
+            `);
+        })
+        .on('mousemove', function(e) {
+          d3.select(props.tooltipRef.current)
+            .style('left', e.pageX + 10 + 'px')
+            .style('top', e.pageY + 10 + 'px');
+        })
+        .on('mouseleave', function() {
+          d3.select(this)
+            .attr('opacity', 1);
+          d3.select(props.tooltipRef.current)
+            .style('visibility', 'hidden');
+        });;
 
     // bars, from right to left: correct, wrong place, wrong letter
 

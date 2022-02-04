@@ -17,7 +17,7 @@ function Stats(props) {
 
   const [data, setData] = useState({ byLetter: [], byRow: [], wins: [], total: '?' });
 
-  const tooltip = useRef(null);
+  const tooltipRef = useRef(null);
 
   useEffect(() => {
     axios.get(`https://api.wordlestat.com/wordle-data/${wordleNumber}`)
@@ -28,16 +28,16 @@ function Stats(props) {
 
   return <div className='stats-background'>
     <main className='wrapper mx-auto px-2'>
-      <div className='stats-tooltip position-fixed' ref={tooltip} style={{ visibility: 'hidden' }} >fjdaskldfljdas</div>
+      <div className='stats-tooltip position-fixed' ref={tooltipRef} style={{ visibility: 'hidden' }} >fjdaskldfljdas</div>
       <Row>
         <Col sm={3}>
-          <ByRow data={data.byRow} tooltipRef={tooltip} />
+          <ByRow data={data.byRow} tooltipRef={tooltipRef} />
         </Col>
         <Col sm={6}>
-          <ByLetter data={data.byLetter}/>
+          <ByLetter data={data.byLetter} tooltipRef={tooltipRef} />
         </Col>
         <Col sm={3}>
-          <Wins data={data.wins}/>
+          <Wins data={data.wins} tooltipRef={tooltipRef} />
         </Col>
       </Row>
       <div className='text-center'>

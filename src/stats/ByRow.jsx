@@ -8,10 +8,7 @@ function ByRow(props) {
   useEffect(() => {
     if(props.data.length === 0) return;
 
-    for(const d of props.data) {
-      d.x = 0;
-      d.y = 0;
-    }
+    props.data.forEach((d, i) => d.i = i);
 
     const svg = d3.select(svgRef.current)
       .attr('height', 500)
@@ -23,24 +20,25 @@ function ByRow(props) {
       .append('svg:g')
         .attr('class', 'by-row-bar')
         .attr('transform', (_, i) => `translate(0, ${i*70})`)
-        .on('mouseenter', function(e, d) {
+        .on('mouseenter', function(_, d) {
           d3.select(this)
             .attr('opacity', 0.8);
           d3.select(props.tooltipRef.current)
             .style('visibility', 'visible')
             .html(`
-              <p class='my-0'>Total: ${d.total} letters</p>
+              <p class='my-0' style='font-weight: 700'>Row ${d.i+1}</p>
+              <p class='color-200 my-0'>Total: ${d.total} letters</p>
               <p class='color-correct my-0'>Correct: ${d.correct} letters (${(d.correct/d.total*100).toFixed(2)}%)</p>
               <p class='color-wrong-place my-0'>Wrong place: ${d.wrongPlace} letters (${(d.wrongPlace/d.total*100).toFixed(2)}%)</p>
-              <p class='text-secondary my-0'>Wrong letter: ${d.wrongLetter} letters (${(d.wrongLetter/d.total*100).toFixed(2)}%)</p>
+              <p class='color-500 my-0'>Wrong letter: ${d.wrongLetter} letters (${(d.wrongLetter/d.total*100).toFixed(2)}%)</p>
             `);
         })
-        .on('mousemove', function(e, d) {
+        .on('mousemove', function(e) {
           d3.select(props.tooltipRef.current)
             .style('left', e.pageX + 10 + 'px')
             .style('top', e.pageY + 10 + 'px');
         })
-        .on('mouseleave', function(e) {
+        .on('mouseleave', function() {
           d3.select(this)
             .attr('opacity', 1);
           d3.select(props.tooltipRef.current)
@@ -79,12 +77,6 @@ function ByRow(props) {
         .duration(750)
         .delay((_, i) => i*250)
         .attr('width', 0);
-
-    bars.each(function(d) {
-      d.x = this.getBoundingClientRect().x;
-      d.y = this.getBoundingClientRect().y;
-      console.log(d.x, d.y);
-    });
 
   }, [props.data]);
 
