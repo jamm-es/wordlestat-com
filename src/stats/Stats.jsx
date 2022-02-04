@@ -28,8 +28,7 @@ function Stats(props) {
 
   return <div className='stats-background'>
     <main className='wrapper mx-auto px-2'>
-      <div>Test</div>
-      <div className='stats-tooltip position-fixed' ref={tooltip} >fjdaskldfljdas</div>
+      <div className='stats-tooltip position-fixed' ref={tooltip} style={{ visibility: 'hidden' }} >fjdaskldfljdas</div>
       <Row>
         <Col sm={3}>
           <ByRow data={data.byRow} tooltipRef={tooltip} />

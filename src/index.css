@@ -6,6 +6,18 @@ body {
   --wrong-letter: rgb(58, 58, 60);
 }
 
+.color-correct {
+  color: var(--correct);
+}
+
+.color-wrong-place {
+  color: var(--wrong-place);
+}
+
+.color-wrong-letter {
+  color: var(--wrong-letter);
+}
+
 .fill-correct {
   fill: var(--correct);
 }
