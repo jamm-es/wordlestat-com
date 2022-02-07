@@ -4,6 +4,11 @@ body {
   --correct: rgb(83, 141, 78);
   --wrong-place: rgb(181, 159, 59);
   --wrong-letter: rgb(58, 58, 60);
+  --wrong-red: rgb(148, 55, 55);
+}
+
+a {
+  cursor: pointer;
 }
 
 .color-correct {
@@ -40,6 +45,15 @@ body {
 
 .fill-stats-background {
   fill: var(--bs-gray-900);
+}
+
+.fill-wrong {
+  fill: var(--wrong-red);
+}
+
+.avg-line {
+  stroke-width: 2;
+  stroke: #FFFFFF;
 }
 
 .logo {

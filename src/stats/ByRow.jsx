@@ -6,13 +6,16 @@ function ByRow(props) {
   const svgRef = useRef();
 
   useEffect(() => {
-    if(props.data.length === 0) return;
+    if(props.data.length === 0 || props.totalData.length === 0) return;
 
-    props.data.forEach((d, i) => d.i = i);
+    props.data.forEach((d, i) => {
+      d.i = i;
+      d.totalData = props.totalData[i];
+    });
 
     const svg = d3.select(svgRef.current)
-      .attr('height', 500)
-      .attr('viewBox', [-10, -30, 140, 500]);
+      .attr('width', '100%')
+      .attr('viewBox', [-10, -30, 150, 520]);
 
     const bars = svg.selectAll('.by-row-bar')
       .data(props.data)
@@ -35,8 +38,8 @@ function ByRow(props) {
         })
         .on('mousemove', function(e) {
           d3.select(props.tooltipRef.current)
-            .style('left', e.pageX + 10 + 'px')
-            .style('top', e.pageY + 10 + 'px');
+            .style('left', e.clientX + 10 + 'px')
+            .style('top', e.clientY + 10 + 'px');
         })
         .on('mouseleave', function() {
           d3.select(this)
@@ -64,6 +67,23 @@ function ByRow(props) {
       .attr('height', 60)
       .attr('width', d => d.wrongLetter / d.total * 130)
       .attr('x', 0);
+    
+    bars.append('svg:line')
+      .attr('class', 'avg-line hide-avg-line')
+      .style('visibility', 'hidden')
+      .attr('y1', 50)
+      .attr('y2', 60)
+      .attr('x1', d => 130 - d.totalData.correct / d.totalData.total * 130)
+      .attr('x2', d => 130 - d.totalData.correct / d.totalData.total * 130);
+
+    bars.append('svg:line')
+      .attr('class', 'avg-line hide-avg-line')
+      .style('visibility', 'hidden')
+      .attr('y1', 50)
+      .attr('y2', 60)
+      .attr('x1', d => d.totalData.wrongLetter / d.totalData.total * 130)
+      .attr('x2', d => d.totalData.wrongLetter / d.totalData.total * 130);
+      
 
     // masking rectangles
 
@@ -78,7 +98,7 @@ function ByRow(props) {
         .delay((_, i) => i*250)
         .attr('width', 0);
 
-  }, [props.data]);
+  }, [props.data, props.totalData]);
 
   return <svg ref={svgRef} />
 }

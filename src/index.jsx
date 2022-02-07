@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Header, Navigation } from './main';
+import { Header, Navigation, Error } from './main';
 import { Stats } from './stats';
 
 import './index.css';
@@ -15,12 +15,19 @@ ReactDOM.render(
       <Header />
       <Routes>
         <Route exact path='/' element={<Navigation wordleNumber={wordleNumber} />} />
+        <Route exact path='/not-found' />
+        <Route exact path='/error' />
         <Route exact path='/:wordleNumberParam' element={<Navigation />} />
       </Routes>
       <Routes>
         <Route exact path='/' element={<Stats wordleNumber={wordleNumber} />} />
         <Route exact path='/:wordleNumberParam' element={<Stats />} />
+        <Route exact path='/not-found' element={<Error type='Not Found' description={`
+          Either you're requesting future data, or you're asking for data too old for us to collect.
+        `} />} />
+        <Route exact path='/error' element={<Error type='Internal Server Error' />} />
       </Routes>
+      <p className='text-center mt-5'>Email me: <a href='mailto:lookatnums@gmail.com' className='text-white'>lookatnums@gmail.com</a></p>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

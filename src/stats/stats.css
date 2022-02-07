@@ -9,3 +9,65 @@
   outline: 2px solid var(--bs-gray-700);
   border-radius: 0.5rem;
 }
+
+.tick > text {
+  fill: var(--bs-gray-500);
+  font-size: 0.75rem;
+}
+
+.tick > line {
+  stroke: var(--bs-gray-500);
+}
+
+.col-mid {
+  width: calc(100% * 400 / (400 + 150 + 150));
+  flex: 0 0 auto;
+}
+
+.col-side {
+  width: calc(100% * 150 / (400 + 150 + 150));
+  flex: 0 0 auto;
+}
+
+.col-sidemid {
+  width: calc(100% * (400 + 150) / (400 + 150 + 150));
+  flex: 0 0 auto;
+}
+
+.col-mobile-side {
+  width: calc(100% * 150 / (20 + 150 + 150));
+}
+
+.col-mobile-mid {
+  width: calc(100% * 20 / (20 + 150 + 150));
+}
+
+.form-check-input {
+  background-color: var(--bs-gray-600);
+}
+
+.form-check-input:checked {
+  background-color: var(--correct);
+  border-color: var(--correct);
+}
+
+.key-image {
+  position: absolute;
+  top: 0;
+}
+
+.form-check-label {
+  user-select: none;
+}
+
+@media (max-width: 800px) {
+  h4 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .tick > text {
+    font-size: 1rem;
+  }
+}
