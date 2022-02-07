@@ -4,6 +4,7 @@ import { Row, Col, Alert, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { BrowserView, MobileView } from 'react-device-detect';
 import * as d3 from 'd3';
+import Helmet from 'react-helmet';
 
 import ByRow from './ByRow';
 import ByLetter from './ByLetter';
@@ -24,8 +25,6 @@ function Stats(props) {
   const [enableGlobalAverages, setEnableGlobalAverages] = useState(false);
   const tooltipRef = useRef(null);
   const navigate = useNavigate();
-
-  const isMobile = document.getWidth
 
   useEffect(() => {
     axios.get(`https://api.wordlestat.com/wordle-data/${wordleNumber}`)
@@ -63,6 +62,15 @@ function Stats(props) {
   }, [enableGlobalAverages])
 
   return <div className='stats-background'>
+    {
+      typeof wordleNumberParam !== 'undefined' && <Helmet>
+        <title>{`Wordle ${wordleNumber}`}</title>
+        <meta 
+          name='description' 
+          content={`Compare your score on Wordle ${wordleNumber} with global overall results. Win rates, guess frequency, difficulty, comparisons, and average Wordle letter and row outcome analysis and statistics for Wordle ${wordleNumber}`}
+        />
+      </Helmet>
+    }
     <main className='wrapper mx-auto px-3'>
       <div className='stats-tooltip position-fixed' ref={tooltipRef} style={{ visibility: 'hidden' }} ></div>
       {
@@ -151,7 +159,7 @@ function Stats(props) {
           <div style={{ maxWidth: '429px', height: '156px' }} className='position-relative' >
             <embed className='key-image' src={globalKeyPath} style={{ visibility: enableGlobalAverages ? 'visible' : 'hidden', top: '2px' }} />
             <embed className='key-image' src={keyPath} style={{ visibility: enableGlobalAverages ? 'hidden' : 'visible'}} />
-          </div>          
+          </div>
         </div>
       </MobileView>
       <div className='text-center'>

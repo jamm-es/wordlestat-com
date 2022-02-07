@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import { Header, Navigation, Error } from './main';
 import { Stats } from './stats';
@@ -11,6 +12,13 @@ const wordleNumber = Math.floor((new Date().getTime() - new Date('January 31, 20
 
 ReactDOM.render(
   <React.StrictMode>
+    <Helmet titleTemplate='%s | WordleStat' >
+      <title>Today's Stats</title>
+      <meta 
+        name='description' 
+        content="Compare your wordle game with global overall results. Win rates, guess frequency, difficulty, comparisons, and average Wordle letter and row outcome analysis and statistics for today's Wordle"
+      />
+    </Helmet>
     <BrowserRouter>
       <Header />
       <Routes>
