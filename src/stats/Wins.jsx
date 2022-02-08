@@ -8,12 +8,9 @@ function Wins(props) {
   useEffect(() => {
     if(props.data.length === 0 || props.totalData.length === 0) return;
 
-    const maxCurrent = Math.max(...props.data);
-    const maxTotal = Math.max(...props.totalData);
-    const maxProp = Math.max(...props.data.map(d => d / maxCurrent), ...props.totalData.map(d => d / maxTotal));
     const total = props.data.reduce((prev, current) => prev + current);
     const globalTotal = props.totalData.reduce((prev, current) => prev + current);
-    const maxBar = Math.max(...props.data.map(d => d / total), ...props.totalData.map(d => d / globalTotal));
+    const maxProp = Math.max(...props.data.map(d => d / total), ...props.totalData.map(d => d / globalTotal));
 
     props.data.map((d, i) => (props.data[i] = ({ 
       wins: d,
@@ -29,7 +26,7 @@ function Wins(props) {
       .attr('transform', 'translate(0, -5)');
 
     const ticks = tickG.selectAll('.tick')
-      .data([0, maxBar])
+      .data([0, maxProp])
       .enter()
       .append('svg:g')
         .attr('class', 'tick')
@@ -84,7 +81,7 @@ function Wins(props) {
       .transition()
         .duration(750)
         .delay((_, i) => i*250)
-        .attr('width', d => d.wins / maxCurrent / maxProp * 130)
+        .attr('width', d => d.wins / total / maxProp * 130)
 
     bars.append('svg:line')
       .attr('class', 'avg-line')
@@ -94,8 +91,8 @@ function Wins(props) {
       .transition()
         .duration(750)
         .delay((_, i) => i*250)
-        .attr('x1', d => d.totalWins / maxTotal / maxProp * 130)
-        .attr('x2', d => d.totalWins / maxTotal / maxProp * 130);
+        .attr('x1', d => d.totalWins / globalTotal / maxProp * 130)
+        .attr('x2', d => d.totalWins / globalTotal / maxProp * 130);
 
   }, [props.data, props.totalData])
 
