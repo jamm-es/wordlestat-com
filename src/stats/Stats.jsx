@@ -50,7 +50,6 @@ function Stats(props) {
   }, []);
 
   useEffect(() => {
-    console.log(d3.selectAll('.hide-avg-line'));
     if(enableGlobalAverages) {
       d3.selectAll('.hide-avg-line')
         .style('visibility', 'visible');
