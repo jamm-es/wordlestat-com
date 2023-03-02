@@ -27,14 +27,6 @@ ReactDOM.render(
         <Route exact path='/error' />
         <Route exact path='/:wordleNumberParam' element={<Navigation />} />
       </Routes>
-      <div className='wrapper mx-auto p-3'>
-        <p>
-          NOTICE: With Twitter <a className='text-info' href='https://twitter.com/TwitterDev/status/1621026986784337922'>shutting off its open API</a>, WordleStat,
-          and numerous other free and fun side projects will no longer function
-          starting on February 9th. If you liked this website, please consider checking out some of my
-          other work at my personal website here: <a className='text-info' href='https://jamesli.io'>jamesli.io</a>
-        </p>
-      </div>
       <Routes>
         <Route exact path='/' element={<Stats wordleNumber={wordleNumber} />} />
         <Route exact path='/:wordleNumberParam' element={<Stats />} />
