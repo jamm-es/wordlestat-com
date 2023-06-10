@@ -8,7 +8,8 @@ import { Stats } from './stats';
 
 import './index.css';
 
-const wordleNumber = Math.floor((new Date().getTime() - new Date('January 31, 2022').getTime()) / (1000*60*60*24))+226;
+// const wordleNumber = Math.floor((new Date().getTime() - new Date('January 31, 2022').getTime()) / (1000*60*60*24))+226;
+const wordleNumber = 720;
 
 ReactDOM.render(
   <React.StrictMode>
@@ -35,7 +36,6 @@ ReactDOM.render(
         `} />} />
         <Route exact path='/error' element={<Error type='Internal Server Error' />} />
       </Routes>
-      <p className='text-center mt-5'>Email me: <a href='mailto:lookatnums@gmail.com' className='text-white'>lookatnums@gmail.com</a></p>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

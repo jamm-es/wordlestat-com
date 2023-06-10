@@ -80,6 +80,22 @@ function Stats(props) {
           more data can be collected.
         </Alert>
       }
+      <Alert variant='dark' className='mt-3' style={{ backgroundColor: '#343a40', color: '#FFFFFF', borderColor: '#495057' }}>
+        <p>
+          Due to <a style={{ color: '#27bcf0' }} href='https://www.theverge.com/2023/3/30/23662832/twitter-api-tiers-free-bot-novelty-accounts-basic-enterprice-monthly-price'>Twitter API changes</a>,
+          it is no longer viable for me to continue running this website with new data. For archival purposes, the site will remain live, with data only current
+          up to Wordle 720 (June 9th, 2023).
+        </p>
+        <p>
+          If you're interested in any of my other work or wish to contact me, you can do so <a style={{ color: '#27bcf0' }} href='https://jamesli.io'>here</a>.
+        </p>
+        <p>
+          Thank you very much for using this website!
+        </p>
+        <p className='mb-0'>
+          Sincerely, James
+        </p>
+      </Alert>
       <BrowserView>
         <Row className='mt-3'>
           <Col className='col-sidemid'>
